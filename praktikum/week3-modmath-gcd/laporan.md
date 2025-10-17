@@ -1,9 +1,9 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
-Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
-NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Minggu ke-: 3 
+Topik: Modular Math 
+Nama: Muhammad Fikri Ananta 
+NIM: 230202817 
+Kelas: 5Ikra  
 
 ---
 
