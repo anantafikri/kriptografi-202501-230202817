@@ -25,30 +25,32 @@ Dengan menggabungkan teknik substitusi dan prinsip aritmetika modular, cipher kl
 ---
 
 ## 3. Alat dan Bahan
-(- Python 3.x  
-- Visual Studio Code / editor lain  
+- Python 3.x  
+- Visual Studio Code
 - Git dan akun GitHub  
-- Library tambahan (misalnya pycryptodome, jika diperlukan)  )
 
 ---
 
 ## 4. Langkah Percobaan
 (Tuliskan langkah yang dilakukan sesuai instruksi.  
 Contoh format:
-1. Membuat file `caesar_cipher.py` di folder `praktikum/week2-cryptosystem/src/`.
+1. Membuat file `Aritmetika Modular` di folder `praktikum/week3-Aritmetika Modular/src/`.
 2. Menyalin kode program dari panduan praktikum.
-3. Menjalankan program dengan perintah `python caesar_cipher.py`.)
+3. Menjalankan program dengan perintah `python Aritmetika Modular.py`.)
 
 ---
 
 ## 5. Source Code
-(Salin kode program utama yang dibuat atau dimodifikasi.  
-Gunakan blok kode:
 
 ```python
-# contoh potongan kode
-def encrypt(text, key):
-    return ...
+def mod_add(a, b, n): return (a + b) % n
+def mod_sub(a, b, n): return (a - b) % n
+def mod_mul(a, b, n): return (a * b) % n
+def mod_exp(base, exp, n): return pow(base, exp, n)  # eksponensiasi modular
+
+print("7 + 5 mod 12 =", mod_add(7, 5, 12))
+print("7 * 5 mod 12 =", mod_mul(7, 5, 12))
+print("7^128 mod 13 =", mod_exp(7, 128, 13))
 ```
 )
 
@@ -76,25 +78,22 @@ Hasil eksekusi program Caesar Cipher:
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
-
----
+Berdasarkan hasil percobaan yang telah saya lakukan, Menunjukan keberhasilan 
+--- 
 
 ## 9. Daftar Pustaka
 (Cantumkan referensi yang digunakan.  
 Contoh:  
-- Katz, J., & Lindell, Y. *Introduction to Modern Cryptography*.  
-- Stallings, W. *Cryptography and Network Security*.  )
+- https://rifqimulyawan.com/literasi/modular-arithmetic/  
+- https://artofproblemsolving.com/wiki/index.php/Modular_arithmetic/Introduction
 
 ---
 
 ## 10. Commit Log
-(Tuliskan bukti commit Git yang relevan.  
-Contoh:
 ```
 commit abc12345
-Author: Nama Mahasiswa <email>
-Date:   2025-09-20
+Author: Muhammad Fikri Ananta <fikriadvan001@gmail.com>
+Date:   2025-10-21
 
-    week2-cryptosystem: implementasi Caesar Cipher dan laporan )
+    week3-modmath-gcd dan laporan )
 ```
