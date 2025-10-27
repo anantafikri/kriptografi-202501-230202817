@@ -1,14 +1,18 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
-Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
-NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Minggu ke-: 4 
+Topik:  Entropy & Unicity Distance (Evaluasi Kekuatan Kunci dan Brute Force)
+Nama: Muhammad Fikri Ananta  
+NIM: 230202817  
+Kelas:5Ikra 
 
 ---
 
 ## 1. Tujuan
-(Tuliskan tujuan pembelajaran praktikum sesuai modul.)
+1.Menyelesaikan perhitungan sederhana terkait entropi kunci.
+2.Menggunakan teorema Euler pada contoh perhitungan modular & invers.
+3.Menghitung unicity distance untuk ciphertext tertentu.
+4.Menganalisis kekuatan kunci berdasarkan entropi dan unicity distance.
+5.Mengevaluasi potensi serangan brute force pada kriptosistem sederhana.
 
 ---
 
