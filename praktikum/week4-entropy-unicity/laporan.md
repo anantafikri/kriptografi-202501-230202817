@@ -22,6 +22,7 @@ Entropy dalam konteks kriptografi menggambarkan tingkat ketidakpastian atau keac
 
 Unicity Distance (Jarak Keunikan)
 Unicity Distance adalah ukuran yang digunakan untuk menentukan berapa banyak ciphertext yang diperlukan agar penyerang dapat secara teoritis mengidentifikasi kunci unik yang digunakan dalam enkripsi. Konsep ini diperkenalkan oleh Claude Shannon dan berkaitan erat dengan redundansi pesan dan ukuran ruang kunci. Jika jumlah ciphertext yang dianalisis melebihi Unicity Distance, maka kunci dapat ditemukan secara unik melalui analisis kriptografi tanpa perlu brute force. Dalam evaluasi kekuatan kunci, semakin besar nilai Unicity Distance, semakin aman sistem karena dibutuhkan lebih banyak data terenkripsi untuk membedakan kunci yang benar dari kemungkinan lainnya. Dengan demikian, baik entropi maupun unicity distance merupakan faktor penting dalam menilai seberapa kuat suatu sistem kriptografi terhadap serangan brute force.
+
 ---
 
 ## 3. Alat dan Bahan
