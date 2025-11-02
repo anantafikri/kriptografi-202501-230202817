@@ -39,14 +39,102 @@ Berbeda dengan dua cipher sebelumnya yang menggunakan teknik substitusi, Cipher 
 ---
 
 ## 5. Source Code
-(Salin kode program utama yang dibuat atau dimodifikasi.  
-Gunakan blok kode:
-
 ```python
-# contoh potongan kode
-def encrypt(text, key):
-    return ...
-```
+def caesar_encrypt(plaintext, key):
+    result = ""
+    for char in plaintext:
+        if char.isalpha():
+            shift = 65 if char.isupper() else 97
+            result += chr((ord(char) - shift + key) % 26 + shift)
+        else:
+            result += char
+    return result
+
+def caesar_decrypt(ciphertext, key):
+    return caesar_encrypt(ciphertext, -key)
+
+# Contoh uji
+msg = "CLASSIC CIPHER"
+key = 3
+enc = caesar_encrypt(msg, key)
+dec = caesar_decrypt(enc, key)
+print("Plaintext :", msg)
+print("Ciphertext:", enc)
+print("Decrypted :", dec)
+
+def vigenere_encrypt(plaintext, key):
+    result = []
+    key = key.lower()
+    key_index = 0
+    for char in plaintext:
+        if char.isalpha():
+            shift = ord(key[key_index % len(key)]) - 97
+            base = 65 if char.isupper() else 97
+            result.append(chr((ord(char) - base + shift) % 26 + base))
+            key_index += 1
+        else:
+            result.append(char)
+    return "".join(result)
+
+def vigenere_decrypt(ciphertext, key):
+    result = []
+    key = key.lower()
+    key_index = 0
+    for char in ciphertext:
+        if char.isalpha():
+            shift = ord(key[key_index % len(key)]) - 97
+            base = 65 if char.isupper() else 97
+            result.append(chr((ord(char) - base - shift) % 26 + base))
+            key_index += 1
+        else:
+            result.append(char)
+    return "".join(result)
+
+# Contoh uji
+msg = "KRIPTOGRAFI"
+key = "KEY"
+enc = vigenere_encrypt(msg, key)
+dec = vigenere_decrypt(enc, key)
+print("Plaintext :", msg)
+print("Ciphertext:", enc)
+print("Decrypted :", dec)
+
+def vigenere_encrypt(plaintext, key):
+    result = []
+    key = key.lower()
+    key_index = 0
+    for char in plaintext:
+        if char.isalpha():
+            shift = ord(key[key_index % len(key)]) - 97
+            base = 65 if char.isupper() else 97
+            result.append(chr((ord(char) - base + shift) % 26 + base))
+            key_index += 1
+        else:
+            result.append(char)
+    return "".join(result)
+
+def vigenere_decrypt(ciphertext, key):
+    result = []
+    key = key.lower()
+    key_index = 0
+    for char in ciphertext:
+        if char.isalpha():
+            shift = ord(key[key_index % len(key)]) - 97
+            base = 65 if char.isupper() else 97
+            result.append(chr((ord(char) - base - shift) % 26 + base))
+            key_index += 1
+        else:
+            result.append(char)
+    return "".join(result)
+
+# Contoh uji
+msg = "KRIPTOGRAFI"
+key = "KEY"
+enc = vigenere_encrypt(msg, key)
+dec = vigenere_decrypt(enc, key)
+print("Plaintext :", msg)
+print("Ciphertext:", enc)
+print("Decrypted :", dec)
 )
 
 ---
@@ -74,25 +162,20 @@ Hasil eksekusi program Caesar Cipher:
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
+Berdasarkan percobaan kode pemrograman chipher klasik yang terdapat pada materi yang kemudian di salin ke vs code berjalan sesuai dengan yang diharapkan 
 
 ---
 
-## 9. Daftar Pustaka
-(Cantumkan referensi yang digunakan.  
-Contoh:  
-- Katz, J., & Lindell, Y. *Introduction to Modern Cryptography*.  
-- Stallings, W. *Cryptography and Network Security*.  )
+## 9. Daftar Pustaka 
+- N., P., & Mira. (2022). Analysis of Classical Cryptographic Algorithms Caesar Cipher Vigenere Cipher and Hill Cipher – Study Literature. Journal of Information Technology, 2(1), 23-30. https://doi.org/10.46229/jifotech.v2i1.387. 
+- O.E. Omolara, A.I. Oludare, & S.E. Abdulahi. (n.d.). Developing a Modified Hybrid Caesar Cipher and Vigenere Cipher for Secure Data Communication. Computer Engineering and Intelligent Systems.
 
 ---
 
 ## 10. Commit Log
-(Tuliskan bukti commit Git yang relevan.  
-Contoh:
-```
 commit abc12345
-Author: Nama Mahasiswa <email>
-Date:   2025-09-20
+Author: Muhammad Fikri Ananta <fikriadvan001@gmail.com>
+Date:   2025-11-02
 
-    week2-cryptosystem: implementasi Caesar Cipher dan laporan )
+    
 ```
