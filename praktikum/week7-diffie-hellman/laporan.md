@@ -88,25 +88,21 @@ Hasil eksekusi program Caesar Cipher:
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
+Berdasarkan hasil eksekusi program diffie hellman yang telah saya lakukan menunjukan keberhasilan yang dapat dilihat hasilnya pada screenshoot.
 
 ---
 
 ## 9. Daftar Pustaka
-(Cantumkan referensi yang digunakan.  
-Contoh:  
-- Katz, J., & Lindell, Y. *Introduction to Modern Cryptography*.  
-- Stallings, W. *Cryptography and Network Security*.  )
+- Diffie, W., & Hellman, M. (1976). New Directions in Cryptography. IEEE Transactions on Information Theory.  
+- RFC 2631 – Diffie–Hellman Key Agreement Method
 
 ---
 
 ## 10. Commit Log
-(Tuliskan bukti commit Git yang relevan.  
-Contoh:
 ```
 commit abc12345
-Author: Nama Mahasiswa <email>
-Date:   2025-09-20
+Author: muhammad fikri ananta <fikriadvan001@gmail.com>
+Date:   2025-11-15
 
-    week2-cryptosystem: implementasi Caesar Cipher dan laporan )
+    week4-cryptosystem: diffie hellman dan laporan )
 ```
