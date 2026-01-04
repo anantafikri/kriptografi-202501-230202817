@@ -66,10 +66,10 @@ Hasil eksekusi program Caesar Cipher:
 ---
 
 ## 7. Jawaban Pertanyaan
-(Jawab pertanyaan diskusi yang diberikan pada modul.  
-- Pertanyaan 1: …  
-- Pertanyaan 2: …  
-)
+- Pertanyaan 1: Banyak sistem lama dirancang pada masa ketika kemampuan komputasi masih terbatas, sehingga mekanisme keamanannya tidak disiapkan untuk menghadapi daya komputasi modern. Akibatnya, sistem tersebut sering menggunakan kata sandi pendek, algoritma hash lama (misalnya tanpa salt atau key stretching), serta tidak memiliki pembatasan percobaan login (rate limiting). Selain itu, faktor manusia juga berperan besar, seperti penggunaan kata sandi lemah dan kebiasaan tidak memperbarui sistem karena alasan kompatibilitas atau biaya. 
+- Pertanyaan 2: Kelemahan algoritma adalah masalah yang berasal dari desain matematis atau konsep dasar algoritma kriptografi itu sendiri. Jika algoritmanya sudah terbukti lemah, maka siapa pun yang menggunakannya akan berisiko, meskipun diimplementasikan dengan benar. Sebaliknya, kelemahan implementasi terjadi ketika algoritma yang sebenarnya kuat diterapkan secara keliru, misalnya menggunakan parameter yang salah, manajemen kunci yang buruk, atau kesalahan pemrograman. Dalam kasus ini, algoritmanya aman secara teori, tetapi praktik penerapannya membuat sistem menjadi rentan.
+- Pertanyaan 3: Organisasi perlu menerapkan pendekatan berkelanjutan, bukan solusi sekali jadi. Langkah penting meliputi penggunaan algoritma dan standar kriptografi yang direkomendasikan saat ini, pembaruan sistem secara berkala, serta audit dan pengujian keamanan rutin. Selain itu, organisasi sebaiknya menerapkan prinsip crypto agility, yaitu kemampuan untuk mengganti algoritma atau parameter kriptografi dengan cepat jika ditemukan kelemahan baru. Edukasi sumber daya manusia dan penerapan kebijakan keamanan yang ketat juga menjadi faktor kunci untuk menjaga keamanan jangka panjang.
+
 ---
 
 ## 8. Kesimpulan
