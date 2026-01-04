@@ -1,14 +1,16 @@
 # Laporan Praktikum Kriptografi
-Minggu ke-: X  
-Topik: [judul praktikum]  
-Nama: [Nama Mahasiswa]  
-NIM: [NIM Mahasiswa]  
-Kelas: [Kelas]  
+Minggu ke-: 14
+Topik: Analisis Serangan 
+Nama: Muhammad Fikri Ananta  
+NIM: 230202817  
+Kelas: 5Ikra 
 
 ---
 
 ## 1. Tujuan
-(Tuliskan tujuan pembelajaran praktikum sesuai modul.)
+1. Mengidentifikasi jenis serangan pada sistem informasi nyata.
+2. Mengevaluasi kelemahan algoritma kriptografi yang digunakan.
+3. Memberikan rekomendasi algoritma kriptografi yang sesuai untuk perbaikan keamanan.
 
 ---
 
