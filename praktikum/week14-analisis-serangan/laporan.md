@@ -15,53 +15,75 @@ Kelas: 5Ikra
 ---
 
 ## 2. Dasar Teori
-(Ringkas teori relevan (cukup 2–3 paragraf).  
-Contoh: definisi cipher klasik, konsep modular aritmetika, dll.  )
+Kriptografi merupakan teknik yang digunakan untuk menjaga kerahasiaan, integritas, dan keaslian data dalam sistem informasi. Salah satu penerapan utama kriptografi adalah pada mekanisme autentikasi, khususnya dalam penyimpanan password. Umumnya, password tidak disimpan dalam bentuk asli (plaintext), melainkan diubah menjadi nilai hash menggunakan algoritma tertentu. Tujuan dari proses hashing ini adalah agar password asli tidak dapat diketahui meskipun data penyimpanan mengalami kebocoran.
+
+Namun, tidak semua algoritma hash memiliki tingkat keamanan yang sama. Algoritma lama seperti MD5 dan SHA-1 dirancang pada saat kemampuan komputasi masih terbatas, sehingga saat ini sudah rentan terhadap serangan brute force, dictionary attack, maupun collision. Kelemahan ini diperparah apabila sistem tidak menerapkan salt atau mekanisme pembatasan percobaan login, sehingga penyerang dapat dengan mudah mencoba berbagai kombinasi password secara otomatis.
+
+Untuk mengatasi permasalahan tersebut, dikembangkan algoritma hash khusus password seperti bcrypt, scrypt, dan Argon2. Algoritma ini dirancang agar proses hashing membutuhkan waktu dan sumber daya yang lebih besar, sehingga tidak efisien untuk diserang menggunakan brute force. Selain pemilihan algoritma yang tepat, keamanan sistem kriptografi juga sangat dipengaruhi oleh implementasi dan konfigurasi yang benar serta pembaruan sistem secara berkala.
 
 ---
 
 ## 3. Alat dan Bahan
-(- Python 3.x  
-- Visual Studio Code / editor lain  
+- Python 3.x  
+- Visual Studio Code  
 - Git dan akun GitHub  
-- Library tambahan (misalnya pycryptodome, jika diperlukan)  )
 
 ---
 
 ## 4. Langkah Percobaan
-(Tuliskan langkah yang dilakukan sesuai instruksi.  
-Contoh format:
-1. Membuat file `caesar_cipher.py` di folder `praktikum/week2-cryptosystem/src/`.
-2. Menyalin kode program dari panduan praktikum.
-3. Menjalankan program dengan perintah `python caesar_cipher.py`.)
+1. Menentukan password uji dan menghasilkan hash MD5 menggunakan bahasa pemrograman Python.
+2. Menyusun daftar password sederhana sebagai wordlist percobaan.
+3. Melakukan proses hashing pada setiap password dalam wordlist dan membandingkannya dengan hash target.
+4. Menghentikan proses ketika ditemukan hash yang cocok dan mencatat password yang berhasil ditebak.
 
 ---
 
 ## 5. Source Code
-(Salin kode program utama yang dibuat atau dimodifikasi.  
-Gunakan blok kode:
 
 ```python
-# contoh potongan kode
-def encrypt(text, key):
-    return ...
+import hashlib
+
+target_hash = "482c811da5d5b4bc6d497ffa98491e38"
+
+wordlist = [
+    "admin",
+    "123456",
+    "password",
+    "password123",
+    "qwerty",
+    "letmein"
+]
+
+for word in wordlist:
+    hash_word = hashlib.md5(word.encode()).hexdigest()
+    if hash_word == target_hash:
+        print("Password ditemukan:", word)
+        break
+    else:
+        print("Mencoba:", word)
+
 ```
-)
+
 
 ---
 
 ## 6. Hasil dan Pembahasan
-(- Lampirkan screenshot hasil eksekusi program (taruh di folder `screenshots/`).  
-- Berikan tabel atau ringkasan hasil uji jika diperlukan.  
-- Jelaskan apakah hasil sesuai ekspektasi.  
-- Bahas error (jika ada) dan solusinya. 
+Pendahuluan
+Perkembangan teknologi informasi mendorong penggunaan sistem keamanan berbasis kriptografi dalam berbagai aplikasi, terutama pada mekanisme autentikasi dan perlindungan data. Namun, masih banyak sistem yang menggunakan algoritma atau konfigurasi lama sehingga rentan terhadap serangan. Oleh karena itu, analisis terhadap studi kasus serangan kriptografi nyata perlu dilakukan untuk memahami kelemahan sistem serta menentukan solusi yang lebih aman. Laporan ini membahas sebuah studi kasus serangan brute force dan dictionary attack pada sistem autentikasi yang menggunakan hash MD5. Analisis difokuskan pada identifikasi jenis serangan, evaluasi kelemahan yang ada, serta rekomendasi solusi yang relevan untuk meningkatkan keamanan sistem.
 
-Hasil eksekusi program Caesar Cipher:
+Studi Kasus Serangan Nyata
+Deskripsi Kasus
+Salah satu kasus yang sering ditemukan adalah penggunaan algoritma hash MD5 untuk menyimpan password pengguna. MD5 dirancang sebagai fungsi hash kriptografi, namun saat ini sudah dianggap tidak aman karena kecepatan komputasinya yang tinggi dan adanya collision. Dalam kasus ini, penyerang memperoleh file database berisi hash password MD5 akibat kebocoran sistem. Dengan memanfaatkan tools brute force dan dictionary attack, penyerang dapat mencoba berbagai kombinasi password hingga menemukan pasangan hash yang sesuai.
 
-![Hasil Eksekusi](screenshots/output.png)
-![Hasil Input](screenshots/input.png)
-![Hasil Output](screenshots/output.png)
-)
+Jenis Serangan:
+1. Brute Force Attack, Penyerang mencoba semua kemungkinan karakter secara sistematis hingga password ditemukan.
+2. Dictionary Attack, Penyerang menggunakan daftar kata sandi umum yang sering dipakai pengguna.
+
+Evaluasi Kelemahan Sistem
+Berdasarkan hasil evaluasi, kelemahan sistem ditemukan pada aspek algoritma, implementasi, dan konfigurasi. Dari sisi algoritma, MD5 memiliki panjang hash yang relatif pendek dan tidak dirancang untuk menghadapi serangan brute force modern. Proses hashing yang sangat cepat menyebabkan algoritma ini mudah diproses oleh komputer dengan spesifikasi tinggi maupun GPU, sehingga meningkatkan peluang keberhasilan serangan. Dari sisi implementasi, sistem tidak menerapkan penggunaan salt pada password, sehingga password yang sama akan menghasilkan hash yang identik. Kondisi ini mempermudah penyerang dalam memanfaatkan teknik serangan berbasis tabel seperti rainbow table. Selain itu, pada aspek konfigurasi, tidak diterapkannya pembatasan jumlah percobaan login maupun mekanisme penguncian akun menyebabkan serangan brute force dapat dilakukan secara berulang tanpa adanya hambatan berarti.
+
+Rekomendasi Solusi
+Untuk meningkatkan keamanan sistem, disarankan mengganti algoritma MD5 dengan algoritma yang lebih aman dan dirancang khusus untuk penyimpanan password, seperti bcrypt, scrypt, atau Argon2. Algoritma tersebut memiliki mekanisme adaptive cost yang membuat proses hashing lebih lambat dan membutuhkan sumber daya lebih besar, sehingga menyulitkan serangan brute force. Selain itu, sistem perlu menerapkan peningkatan mekanisme keamanan dengan menambahkan salt unik pada setiap password, menerapkan pembatasan percobaan login serta penguncian akun setelah beberapa kali kegagalan, dan menggunakan autentikasi multi-faktor sebagai lapisan keamanan tambahan. Dengan penerapan solusi tersebut, sistem akan menjadi lebih tahan terhadap serangan brute force dan dictionary attack, serta mampu mengurangi risiko kebocoran data pengguna secara signifikan.
 
 ---
 
@@ -73,25 +95,21 @@ Hasil eksekusi program Caesar Cipher:
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
+Berdasarkan analisis yang dilakukan, dapat disimpulkan bahwa penggunaan algoritma kriptografi yang sudah usang seperti MD5 berpotensi menimbulkan risiko keamanan serius. Kelemahan tidak hanya berasal dari algoritma, tetapi juga dari implementasi dan konfigurasi sistem. Oleh karena itu, penerapan algoritma modern serta mekanisme keamanan tambahan sangat diperlukan untuk menjaga kerahasiaan dan integritas data.
 
 ---
 
-## 9. Daftar Pustaka
-(Cantumkan referensi yang digunakan.  
-Contoh:  
-- Katz, J., & Lindell, Y. *Introduction to Modern Cryptography*.  
-- Stallings, W. *Cryptography and Network Security*.  )
+## 9. Daftar Pustaka 
+- Stallings, W. (2017). Cryptography and Network Security: Principles and Practice (7th ed.). Pearson Education.  
+- Kahn Academy. (n.d.). Cryptographic hash functions.
 
 ---
 
 ## 10. Commit Log
-(Tuliskan bukti commit Git yang relevan.  
-Contoh:
 ```
 commit abc12345
-Author: Nama Mahasiswa <email>
-Date:   2025-09-20
+Author: Muhammad Fikri Ananta <fikriadvan001@gmail.com>
+Date:   2026-01-05
 
-    week2-cryptosystem: implementasi Caesar Cipher dan laporan )
+    week14-cryptosystem: analisis serangan dan laporan )
 ```
