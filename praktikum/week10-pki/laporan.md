@@ -15,11 +15,9 @@ Kelas: 5Ikra
 ---
 
 ## 2. Dasar Teori
-Public Key Infrastructure (PKI) merupakan suatu kerangka kerja yang digunakan untuk mengelola kunci kriptografi dan sertifikat digital guna menjamin keamanan komunikasi elektronik. PKI memanfaatkan kriptografi kunci publik, di mana setiap entitas memiliki sepasang kunci, yaitu kunci publik dan kunci privat. Kunci publik digunakan untuk enkripsi atau verifikasi tanda tangan digital, sedangkan kunci privat digunakan untuk dekripsi atau pembuatan tanda tangan digital. Dengan PKI, identitas pihak yang berkomunikasi dapat diverifikasi sehingga aspek keamanan seperti kerahasiaan, integritas data, autentikasi, dan non-repudiation dapat terjamin.
+Public Key Infrastructure (PKI) merupakan sistem yang digunakan untuk mengelola kunci kriptografi dan sertifikat digital guna menjamin keamanan komunikasi. PKI memungkinkan proses autentikasi, kerahasiaan, integritas data, serta non-repudiation dengan memanfaatkan kriptografi kunci publik. Sertifikat digital berisi informasi identitas pemilik dan public key yang digunakan untuk verifikasi.
 
-Certificate Authority (CA) adalah komponen utama dalam PKI yang berfungsi sebagai pihak tepercaya (trusted third party). CA bertugas menerbitkan, memvalidasi, dan mencabut sertifikat digital yang mengaitkan identitas pemilik dengan kunci publiknya. Proses ini dilakukan melalui verifikasi identitas sebelum sertifikat diterbitkan, sehingga pengguna dapat mempercayai bahwa kunci publik dalam sertifikat benar-benar milik entitas yang sah. Sertifikat digital ini umumnya mengikuti standar X.509 dan banyak digunakan pada layanan seperti HTTPS, email aman, dan tanda tangan digital.
-
-Selain CA, PKI juga melibatkan komponen lain seperti Registration Authority (RA), repository sertifikat, serta mekanisme pencabutan sertifikat melalui Certificate Revocation List (CRL) atau Online Certificate Status Protocol (OCSP). Kombinasi komponen tersebut memungkinkan sistem keamanan yang terstruktur dan skalabel untuk lingkungan jaringan modern. Dengan adanya PKI dan CA, pertukaran data melalui jaringan publik dapat dilakukan secara aman tanpa memerlukan pertukaran kunci rahasia secara langsung.
+Certificate Authority (CA) berperan sebagai pihak tepercaya yang menerbitkan dan memvalidasi sertifikat digital. CA memastikan bahwa public key benar-benar milik entitas yang sah. Dalam komunikasi aman seperti HTTPS/TLS, browser memverifikasi sertifikat server melalui CA untuk mencegah serangan seperti Man-in-the-Middle (MITM).
 
 ---
 
@@ -31,10 +29,11 @@ Selain CA, PKI juga melibatkan komponen lain seperti Registration Authority (RA)
 ---
 
 ## 4. Langkah Percobaan
-1. Langkah 1 — Membuat Sertifikat Digital Sederhana
-2. Menyalin kode program dari panduan praktikum.
-3. Langkah 2 — Memverifikasi Sertifikat
-4. Langkah 3 — Analisis PKI
+1. Membuat pasangan kunci (private key & public key).
+2. Menentukan identitas sertifikat (subject).
+3. Membuat sertifikat digital self-signed.
+4. LMenandatangani sertifikat menggunakan private key.
+5. Menyimpan sertifikat dalam format .pem.
 
 ---
 
@@ -47,50 +46,47 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 from datetime import datetime, timedelta
 
-# Generate key pair
-key = rsa.generate_private_key(public_exponent=65537, key_size=2048)
-
-# Buat subject & issuer (CA sederhana = self-signed)
-subject = issuer = x509.Name([
-    x509.NameAttribute(NameOID.COUNTRY_NAME, u"ID"),
-    x509.NameAttribute(NameOID.ORGANIZATION_NAME, u"UPB Kriptografi"),
-    x509.NameAttribute(NameOID.COMMON_NAME, u"example.com"),
-])
-
-# Buat sertifikat
-cert = (
-    x509.CertificateBuilder()
-    .subject_name(subject)
-    .issuer_name(issuer)
-    .public_key(key.public_key())
-    .serial_number(x509.random_serial_number())
-    .not_valid_before(datetime.utcnow())
-    .not_valid_after(datetime.utcnow() + timedelta(days=365))
-    .sign(key, hashes.SHA256())
+# Generate private key
+key = rsa.generate_private_key(
+    public_exponent=65537,
+    key_size=2048
 )
 
-# Simpan sertifikat
+# Subject & issuer
+subject = issuer = x509.Name([
+    x509.NameAttribute(NameOID.COUNTRY_NAME, "ID"),
+    x509.NameAttribute(NameOID.ORGANIZATION_NAME, "UPB"),
+    x509.NameAttribute(NameOID.COMMON_NAME, "localhost"),
+])
+
+# Create certificate
+cert = x509.CertificateBuilder().subject_name(
+    subject
+).issuer_name(
+    issuer
+).public_key(
+    key.public_key()
+).serial_number(
+    x509.random_serial_number()
+).not_valid_before(
+    datetime.utcnow()
+).not_valid_after(
+    datetime.utcnow() + timedelta(days=365)
+).sign(key, hashes.SHA256())
+
+# Save certificate
 with open("cert.pem", "wb") as f:
     f.write(cert.public_bytes(serialization.Encoding.PEM))
 
-print("Sertifikat digital berhasil dibuat: cert.pem")
+print("Sertifikat digital berhasil dibuat")
+
 ```
 )
 
 ---
 
 ## 6. Hasil dan Pembahasan
-(- Lampirkan screenshot hasil eksekusi program (taruh di folder `screenshots/`).  
-- Berikan tabel atau ringkasan hasil uji jika diperlukan.  
-- Jelaskan apakah hasil sesuai ekspektasi.  
-- Bahas error (jika ada) dan solusinya. 
-
-Hasil eksekusi program Caesar Cipher:
-
-![Hasil Eksekusi](screenshots/output.png)
-![Hasil Input](screenshots/input.png)
-![Hasil Output](screenshots/output.png)
-)
+Hasil dari program di atas adalah sertifikat digital self-signed dalam format .pem. Sertifikat ini dapat digunakan untuk simulasi HTTPS atau pembelajaran PKI. Verifikasi sertifikat dilakukan dengan mencocokkan tanda tangan digital menggunakan public key. Dalam praktik nyata, sertifikat akan diverifikasi oleh CA tepercaya agar browser tidak menampilkan peringatan keamanan. Jika CA palsu digunakan, maka browser akan menolak sertifikat dan koneksi dianggap tidak aman. Oleh karena itu, PKI sangat penting dalam menjaga keamanan transaksi online seperti login, pembayaran, dan pertukaran data sensitif.
 
 ---
 
@@ -102,7 +98,7 @@ Hasil eksekusi program Caesar Cipher:
 ---
 
 ## 8. Kesimpulan
-(Tuliskan kesimpulan singkat (2–3 kalimat) berdasarkan percobaan.  )
+PKI berperan penting dalam mengamankan komunikasi digital melalui penggunaan sertifikat dan kriptografi kunci publik. Praktikum ini menunjukkan bahwa pembuatan sertifikat digital dengan Python membantu memahami proses dasar PKI, meskipun sertifikat self-signed hanya cocok untuk keperluan pembelajaran.
 
 ---
 
@@ -119,5 +115,5 @@ commit abc12345
 Author: Muhammad Fikri Ananta <fikriadvan001@gmail.com>
 Date:   2025-12-13
 
-    week10-cryptosystem: Public Key Infrastructure (PKI & Certificate Authority) dan laporan )
+    week10-cryptosystem: Public Key Infrastructure (PKI & Certificate Authority) dan laporan 
 ```
